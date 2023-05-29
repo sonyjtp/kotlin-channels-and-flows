@@ -11,10 +11,10 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
 
 @OptIn(ExperimentalCoroutinesApi::class)
-private suspend fun produceNumbers(scope: CoroutineScope) = scope.produce {
+private suspend fun produceBookId(scope: CoroutineScope) = scope.produce {
     var i = 1
     while(true) {
-        delay(timeMillis = 200)
+        delay(timeMillis = 20)
         send(i++).also { println("Sending ${i - 1}") }
     }
 }
@@ -31,9 +31,9 @@ private suspend fun consume(
 }
 
 fun main()  = runBlocking {
-    val producer = produceNumbers(this).map(this) { it * it }
+    val producer = produceBookId(this).map(this) { it * it }
     consume(this, producer)
-    delay(timeMillis = 1000)
+    delay(timeMillis = 200)
     producer.cancel()
 }
 

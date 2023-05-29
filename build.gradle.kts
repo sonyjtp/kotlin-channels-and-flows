@@ -40,4 +40,5 @@ kotlin {
 
 application {
     mainClass.set("com.learn.MainKt")
+    applicationDefaultJvmArgs = listOf("-Dkotlinx.coroutines.debug")
 }
